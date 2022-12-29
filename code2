@@ -1,0 +1,124 @@
+1)数据库连接
+import java.sql.Connection;
+import java.sql.DriverManager;
+public class DB{
+private String Driver_name ="jdbc:mysql://localhost:3306/test";
+private String USER= "root";
+private String PASS = "root";
+public static Connection con;
+public DB(){
+try {
+Class.forName("com.mysql.jdbc.Driver");
+con = DriverManager.getConnection(Driver_name,USER,PASS);
+con.prepareStatement("set NAMES utf8").executeUpdate();
+} catch (Exception e){
+// TODO Auto-generated catch block
+e.printStackTrace();
+}
+}
+public static Connection getConnection(){
+if(con == null){
+new DB();
+}
+	Return con;
+}
+}
+(2)系统登陆
+public class Login {
+Font d = new Font("楷体"，Font.BoLD，22);
+Font f = new Font("楷体",Font.BOLD，15) ;
+JFrame logingui = new JFrame ("用户登录界面");
+JLabel userlogin = new JLabel("用户登录");
+JLabel username = new JLabel("用户名:");
+JLabel password = new JLabel("密码:");
+JTextField name = new JTextField ( );
+JTextField pwd = new JPasswordField ( ) ;
+JButton login = new JButton ("登陆");
+JButton cancle = new JButton ("取消");
+JButton regist = new JButton ( "注册");
+User user = new User () ;
+(3）系统注册
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Calendar;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import net.cw.edu.CalendarPad;
+import net.cw.view.DB;
+public class registgui {
+/初始化字体
+Font d = new Font("楷体", Font.BOLD,22);
+//初始化对象
+JTextField name = new JTextField();
+JTextField pwd = newJPasswordField();
+JTextField rpwd = newJPasswordField();
+JFrame registgui= new JFrame("用户注册界面");
+JLabel userregist = new JLabel("用户注册");
+JLabel username = new JLabel("用户名:");
+JLabel password = new JLabel("密码:");
+JLabel rpassword = new JLabel("确认密码:");
+JButton affirm = new JButton("确认");
+User user = new User();
+(4)记录日志
+public string获取日志内容(int year,int month,int day)
+string key=""+year+""+month+""+day;
+connection con = DB.getConnection ( ) ;
+try {
+Preparedstatement ps = con.preparestatement ( "select * fromlog" ) ;
+Resultset rs = ps.executeQuery ( );
+if (rs.getRow () != 0){
+rs.first ( ) ;
+String text = rs.getstring ( 3 ) ;设置文本区(text);
+return rs.getstring (text);
+} else {
+text.setText( "无记录");
+return null;
+(5）删除或保存日志
+public class NotePad extends JPanel implements ActionListener{
+JTextArea text;
+JButton保存日志，删除日志;
+Hashtable table;
+JLabel信息条;
+int year , month, day ;
+File file;
+calendarPad calendar ;
+public NotePad(CalendarPad calendar){
+this.calendar=calendar;
+year=calendar.getYear ( ) ;
+month=calendar.getMonth ( ) ;
+day=calendar.getDay ( ) ; ;
+table=calendar.getHashtable ( ) ;
+file=calendar.getFile ( ) ;
+信息条=new JLabel(""+year+"年"+month+"月"+day+"日",JLabel.CENTER);
+信息条.setFont (new Font ( "TimesRoman" ,Font. BOLD,16) ) ;
+信息条.setForeground(color.blue) ;
+text=new JTextArea (10,10 ) ;
+保存日志=new JButton ("保存日志");
+删除日志=new JButton ("删除日志");
+保存日志.addActionListener ( this) ;
+删除日志.addActionListener ( this) ;
+setLayout (new BorderLayout ( ) ) ;
+JPanel psouth=new JPanel ( ) ;
+add(信息条，BorderLayout. NORTH);
+psouth.add(保存日志);
+pSouth.add(删除日志);
+add (psouth,BorderLayout.soUTH);
+add(new JScrollPane (text),BorderLayout.CENTER);
+}
+public void actionPerformed (ActionEvent e)
+if(e.getsource ( )==保存日志)
+{
+保存日志(year , month, day);
+}
+else if(e.getSource ( )==删除日志){
+删除日志(year , month, day) ;
+}
+}
