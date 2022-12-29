@@ -1,0 +1,60 @@
+package com.czy.javaclass;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class CaculatorDemo {
+    public static void main(String[] args) {
+        JS win=new JS();
+    }
+}
+class JS extends JFrame implements ActionListener{
+    private StringBuilder sBuilder = new StringBuilder();  //利用StringBuilder类来显示，以及区分两个操作数
+    JTextArea text=new JTextArea();
+    double a,b;
+    Double sum;
+    int i;
+    public JS()
+    {
+        setBounds(100,100,400,400);
+        setTitle("计算器");
+        JMenuBar menubar=new JMenuBar();//创建菜单条
+        JMenu menu1=new JMenu("查看(V)");//创建和设置菜单名
+        JMenu menu2=new JMenu("编辑(E)");//创建和设置菜单名
+        JMenu menu3=new JMenu("帮助(H)");//创建和设置菜单名
+        menubar.add(menu1);//将菜单加入到菜单条中
+        menubar.add(menu2);
+        menubar.add(menu3);
+        this.setJMenuBar(menubar);//将设置好的菜单条放在窗口中
+        this.setLayout(new BorderLayout());//添加文本框
+        JPanel p1=new JPanel();
+        JPanel p2=new JPanel();
+        text.setPreferredSize(new Dimension (370,60));//设置组件大小
+        p2.setLayout(new FlowLayout());
+        p1.add(text);
+        this.add(p1,BorderLayout.NORTH);
+
+
+        p2.setLayout(new GridLayout(5,4)); //添加按钮
+        JButton button[]=new JButton[20];
+        button[0]=new JButton("C");       //清空
+        button[1]=new JButton("CE");   //清除之前输入的一个数据
+        button[2]=new JButton("%");       //取余
+        button[3]=new JButton("÷");   //除法
+        button[4]=new JButton("7");
+        button[5]=new JButton("8");
+        button[6]=new JButton("9");
+        button[7]=new JButton("x");  //乘号
+        button[8]=new JButton("4");
+        button[9]=new JButton("5");
+        button[10]=new JButton("6");
+        button[11]=new JButton("—");  //减号
+        button[12]=new JButton("1");
+        button[13]=new JButton("2");
+        button[14]=new JButton("3");
+        button[15]=new JButton("+");  //加号
+        button[16]=new JButton("e");   //乘方
+        button[17]=new JButton("0");
+        button[18]=new JButton(".");  //小数
